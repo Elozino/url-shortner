@@ -1,8 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const ShortUrl = require("./models/shortUrl.js");
+const dotenv = require('dotenv');
 
-const PORT = 5000;
+dotenv.config();
+
+const PORT = process.env.PORT || 5000;
 const app = express();
 
 // Middlewares
@@ -10,9 +13,8 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 
 mongoose
-  .connect(
-    "mongodb+srv://elozino:qwerty123@cluster0.37gbscy.mongodb.net/?retryWrites=true&w=majority",
-    {
+  .connect( process.env.MONGODB_KEY,
+        {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     }
